@@ -101,11 +101,42 @@ const compare = (
       currentIconsGroup.appendChild(newIcon);
     }
   });
+  // remove input list
+  figma.currentPage.children[1].remove();
+};
+
+const sortList = () => {
+  const currentIconsGroup = figma.currentPage.children[0] as GroupNode;
+  let x = 0;
+  let y = 0;
+  let increment = 50;
+
+  const copy = [...currentIconsGroup.children].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  copy.forEach((item, i) => {
+    currentIconsGroup.appendChild(item);
+    x = i % 10 === 0 ? 0 : x + increment;
+    y = i % 10 === 0 ? y + increment : y;
+    item.x = x;
+    item.y = y;
+  });
+};
+
+const optimize = () => {
+  // TODO: action to optimize svg
 };
 
 figma.ui.onmessage = async (msg) => {
+  if (msg.type === "optimize") {
+    optimize();
+  }
   if (msg.type === "list") {
     generateList();
+  }
+  if (msg.type === "sortList") {
+    sortList();
   }
   if (msg.type === "compare") {
     grabDiffData();
