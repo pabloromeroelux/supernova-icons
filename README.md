@@ -1,7 +1,10 @@
-** Electrolux internal Figma plugin **
+Electrolux internal Figma plugin. Prepare icon for sync with Supernova.
 
-DEV:
-1.- Install Node.js and NPM.
-2.- npm install -g typescript
-3.- npm install --save-dev @figma/plugin-typings
-4.- npm run watch
+Install dependencies:
+`npm install`
+
+dev:
+`npm run dev`
+
+prod:
+`npm run build`
